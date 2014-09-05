@@ -117,7 +117,7 @@ More generally, the CHC says:
 `A` holds.              | `A` is inhabited.
 `A` has a proof.        | There are members or values of this type `A`.
 `A → B` (A implies B).  | Function types: `A → B`.
-`A ∧ B` (conjunction).  | A × B (product types: records, `struct`'s, etc.)
+`A ∧ B` (conjunction).  | `A × B` (product types: records, `struct`'s, etc.)
 
 And more…
 
