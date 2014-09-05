@@ -44,7 +44,7 @@ accessible through one of the following:
 There are two programming languages inside Coq:
 
 *   _Gallina_ (`Proof`, `Fact`, etc.), 
-*   _Vernacular_ (`forall`, `assumption`).
+*   _Vernacular_ (`forall`, `assumption`, etc.).
 
 In fact there are some more PLs inside Coq. E.g. _ltacs_ for defining new tactics.
 
