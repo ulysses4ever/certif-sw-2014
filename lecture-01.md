@@ -43,10 +43,10 @@ accessible through one of the following:
 
 There are two programming languages inside Coq:
 
-*   _Gallina_ (`Proof`, `Fact`, etc.), 
-*   _Vernacular_ (`forall`, `assumption`, etc.).
+*   _Vernacular_ (`Proof`, `Fact`, etc.), 
+*   _Gallina_ (`forall`, `\/`, etc.).
 
-In fact there are some more PLs inside Coq. E.g. _ltacs_ for defining new tactics.
+In fact there are some more PLs inside Coq. E.g. _Ltac_ for defining new tactics.
 
 Coq have two levels:
 
