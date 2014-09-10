@@ -1,3 +1,4 @@
+
 (* Let's look at the following example: *)
 Example ex1: forall A B: Prop, (A -> B) -> A -> B.
 (* We want to prove, that for all propositions A and B if A implies B and A holds then B also holds.
@@ -50,9 +51,10 @@ Example ex3: forall x y z: Prop, (x -> z) -> (y -> z) -> (x \/ y -> z).
 Proof.
   intros. (* Look at hypotheses, the main question here is how to use disjunction in H1. 
              We have to 'destruct' it, that means exploring two cases: if x holds and if y holds.
-             If disjunction in H1 holds then one of its parts is necesserily holds, but we don't
+             If disjunction in H1 holds then one of its parts is necessarily holds, but we don't
              know which one, so we do really have two cases. *)
   destruct H1. (* H1 becomes 'x', so x holds and we apply implication H. *)
+    (* Note indentation here, this is way to mark visually proofs for subgoals arisen after 'destruct'. *)
     apply H. assumption. (* The first case is solved and we move to the second one. *)
     (* H1 becomes 'y', so y holds and we apply implication H0. *)
     apply H0. assumption.
