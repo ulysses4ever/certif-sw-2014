@@ -2,8 +2,9 @@
 
 ###Biblio###
 
-* Software Foundations, chaps. Basics and Induction,
-* Chlipala's book: first half of ch. 3.
+* 	Software Foundations, chaps. Basics and Induction (you should work out
+	all exercises from these),
+* 	Chlipala's book: first half of ch. 3.
 
 Recall the table from last lecture.
 
@@ -24,8 +25,7 @@ Coq only typechecks the term that we build. If it succeeds then this means
 that we have proved corresponding proposition.
 
 Consider following examples using Vernacular command **`Check`** which
-shows us
-types.
+shows us types.
 
 	Check (fun x: nat => x).
 		: nat -> nat
@@ -60,7 +60,7 @@ Consider following theorem.
 
 	Theorem bad: False -> 2 + 2 = 5.
 	Proof.
-		intro.			| H: True
+		intro.			| H: False
 		destruct H.		| No more goals.
 	Qed.
 
@@ -96,7 +96,7 @@ Now the proof term looks a little bit different.
 			 forall P Q: (P -> Q) -> P -> Q
 
 Here we have extra inner anonymous function but still it's a proof term.
-Let's see another example wwith **`auto`** now.
+Let's see another example with **`auto`** now.
 
 	Theorem mp: forall P Q: Prop, (P -> Q) -> P -> Q.
 	Proof.
@@ -115,25 +115,26 @@ Which non-automatic proof would yield this? Here it is.
 		exact H.
 	Qed.
 
-Check what does proof term likes for a proof containing `destruct`.
+Check what does proof term looks like for a proof containing `destruct`.
 
 ## Programming in Coq with inductive types
 
-Instead af famous
+Instead of famous
 
 > Algorithms + Data Structures = Programs
 
 we will have
 
-> Tepes + Functions + Theorems = Programs
+> Types + Functions + Theorems = Programs
 
 Actually we can unite Types and Theorems in Dependent Types, but we 
 postpone it to the later.
 
 ### “Rock / Paper / Scissors” game
 
-Let's try to program the game's logic (see Wikipedia article for 
-drammatical details!) in the following way.
+Let's try to program the game's logic (see 
+[Wikipedia article](http://en.wikipedia.org/wiki/Rock-paper-scissors) 
+for dramatical details!) in the following way.
 
 	Inductive weapon: Set = rock | paper | scissors.
 	
