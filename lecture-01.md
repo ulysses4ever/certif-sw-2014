@@ -86,7 +86,8 @@ We will use the second approach, that is programming with dependent types.
 _Disclaimer_: this section has nothing to do with Coq.
 
 It all starts with a try to exit from a number of problems in Mathematics.
-Some scientists at the beginning of XX cent. came out with idea of so called
+Some scientists at the beginning of XX cent. (Brouwer, Kolmogorov, etc.)
+came out with idea of so called
 **intuitionistic logic** or **intuitionism**. The one generally based on a 
 belief that one of the core principle in classic logic (base for that time 
 Mathematics), that is the _law of excluded middle_ (`A or ~A is true`, `~` 
