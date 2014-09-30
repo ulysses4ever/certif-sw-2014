@@ -91,16 +91,21 @@ Here `_rect` means _recursion on types_.
 Recall we have three _universes_: `Type`, `Set`, `Prop`. But thing are a 
 little more involved: `Set`, `Prop` ∊ `Type`. So `Type` includes `Set` and 
 `Prop`. And `nat_ind` is a part of a universe of propositions, `nat_rect` — of 
-types. We should have some analogy of this in the universe of sets. See below.
+types. We of course should have some analogy of this in the universe of 
+sets and this called `nat_rec`.
 
-    Print nat_rec
-        fun (P: nat -> Set)(f: P O)(f0: forall n, Pn -> P (S n)) => 
+Let's inspect definition of `nat_rect` which forms a basis for both,
+`nat_ind` and `nat_rec` (again, you may `Print` them, to convince yourself).
+
+    Print nat_rect
+        fun (P: nat -> Type)(f: P O)(f0: forall n, Pn -> P (S n)) => 
         fix F (n: nat): P n := match n as n0 return (P n0) with
             | O     => f
             | S n0  => f0 n0 (F n0)
         end
 
-This `nat_rec` is anonymous function (`fun args => body`) has three arguments: 
+This `nat_rect` is anonymous function (`fun args => body`) has three 
+arguments: 
 predicate, recursion base, recursion step. Then the body is defined via
 _recursive_ anonymous function (which is reflected by `fix`). This `fix` has
 following structure: `fix name (args): type := body` and `body` uses `name`.
@@ -119,7 +124,7 @@ it ourself simpler. Let's see this.
         Fixpoint nat_ind' (n: nat): P n := match n with 
             | O => O_Case
             | S n => S_Case (nat_ind' n') (* using Set Implicit Args? *)
-        End nat_ind'.
+    End nat_ind'.
 
 We remind that every time we define inductive type `T` we get all three:
 `T_ind`, `T_rec`, `T_rect`. There are cases though when these automatically
@@ -136,8 +141,12 @@ Let's see what these generated object are good for. Recall usual definition of
 
 Now we give definition for `plus` _without explicit recursion_.
 
-    Definition plus' 
+    Definition plus' : nat -> nat -> nat :=
+        nat_rec 
+			(fun _ : nat => nat -> nat) 
+			(fun m => m) 
+			(fun _ r m => S (r m)).
 
-### Home reading
+### Home assignment
 
 * Software Foundations, chap. Poly
