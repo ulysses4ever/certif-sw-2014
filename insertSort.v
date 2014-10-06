@@ -154,14 +154,3 @@ Defined.
 
 Extraction Language Haskell.
 Extraction "insert_sort" ins_sorted sort.
-
-
-
-
-
-
-
-
-
-
-

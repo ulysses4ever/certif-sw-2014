@@ -115,7 +115,8 @@ have to prove it):
 
 where `ins` is a function for ordered insertion in a list.
 
-See full proof in `insertSort.v`.
+See full proof in
+[`insertSort.v`](https://github.com/ulysses4ever/certif-sw-2014/blob/master/insertSort.v).
 
 ## Home Assignment
 
