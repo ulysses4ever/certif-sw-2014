@@ -54,13 +54,23 @@ Print pred'''''.
 Eval compute in pred''''' 6.
 Eval compute in pred''''' 0.
 
-(* Problem 1: 0 => 0 oddity *)
+(* 
+Problems with these definitions of pred:
+  1) Type nat->nat is very unspecific.
+  2) Behaviour on zero is odd (actually there should be no predecessor for zero):
+    a) solution #1: precondition (n > 0);
+    b) solution #2: expressing alternative (information for the programmer).
+
+Plan: 2a), 1), 2b).
+*)
+  
+(* Problem 2 (0 => 0 oddity), solution #1 *)
 
 Lemma zgtz: 0 > 0 -> False.
   inversion 1.
 Qed.
 
-Print sig.
+Print sig. (* sigma = subset type *)
 
 (*
 Inductive sig (A : Type) (P : A -> Prop) : Type :=
@@ -90,7 +100,7 @@ Gt.gt_Sn_O 1
 
 Eval compute in pred_strong1 (exist _ 2 (Gt.gt_Sn_O 1)).
 
-(* Problem 2: precondition & result specification *)
+(* Problem 1 (precondition & result specification) *)
 
 Definition pred_strong2: forall n: nat, n > 0 -> {m: nat | n = S m}.
   intros.
@@ -113,11 +123,11 @@ Notation "[ e ]" :=(exist _ e _).
 
 Eval compute in pred_strong2 10 (Gt.gt_Sn_O 9).
 
-Definition pred_strong3: forall n: nat, n > 0 -> {m: nat | n = S m}.
+Definition pred_strong2': forall n: nat, n > 0 -> {m: nat | n = S m}.
   refine 
    (fun n => match n with
      | O => fun pf => False_rec _ _
-     | S n' => fun _ => exist _ n' _
+     | S n' => fun _ => [ n' ]
      end).
 (*
 2 subgoals, subgoal 1 (ID 150)
@@ -136,23 +146,19 @@ Print False_rec.
 (* False_rec = fun P : Set => False_rect P
      : forall P : Set, False -> P *)
 
-(* Problem 3: what if there is no proof for n>0? 
-  We should allow to fail gracefully. *)
+(* Problem 2, solution #2.
+  Result is a value or not a value (alternative).
+*)
 
-(* Version 1: result is a value or not a value *)
-Definition pred_strong4: forall n: nat, {m: nat | n = S m} + {n = 0}.
+Definition pred_strong3: forall n: nat, {m: nat | n = S m} + {n = 0}.
   refine 
    (fun n => match n with
      | O => inright _ _
-     | S n' => inleft _ _ 
-     end).
-  reflexivity.
-  exists n'.
-  reflexivity.
+     | S n' => inleft _ [n']
+     end); reflexivity.
 Defined.
 
 Print sumor.
-
 (*
 Inductive sumor (A : Type) (B : Prop) : Type :=
     inleft : A -> A + {B} | inright : B -> A + {B}
@@ -238,14 +244,17 @@ match eq_nat_dec x y with
 | right _ => _
 end
 
-2) 
+OR
+ 
 if eq_nat_dec x y then _ else _
 
-3) 
+2) 
 destruct (eq_nat_dec x y).
+
+It is easy to find examples of this in insertSort.v.
 *)
 
-(* List membership *)
+(* List membership (addendum --- not from lecture) *)
 
 Set Implicit Arguments.
 
