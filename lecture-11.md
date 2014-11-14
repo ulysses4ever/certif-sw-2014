@@ -37,7 +37,7 @@ We try to prove that this relational definition of plus, call it `plusR`,
 coincide with built-in `+`. Cf. `Theorem plus_plusR` and
  `Theorem plusR_plus` in examples for this lecture.
 
-Proving things like `plusR 3 4 7` involves repetitive tries of using of
+Proving things like `plusR 3 4 7` involves repetitive tries of using one of
 the constructors: `PlusO` or `PlusS`. In fact this is the thing which
 is done by `auto`. We can convince ourselves using special tactic:
 **`info_auto`** which prints the steps performed by `auto` on its way to
@@ -48,7 +48,7 @@ It is a general approach:
 > while goal not proved {apply all constructors until one of them succeeds}
 
 This procedure traverses implicit **proof tree**. The number of possible
-paths from root to a leaf is _n_<sup>_m_</sup>, where _m_ is number of
+paths from root to a leaf is _n_<sup>_m_</sup>, where _n_ is number of
 constructors and _m_ is a maximum depth for us to try. Our `auto`
 tactic has _m_ equal to 5.
 
@@ -80,7 +80,7 @@ We prove functional analogues of our relational definition for `PlusR`
 for `+`. It allows for translate our proofs from previous subsection
 to the `+`.
 
-### Case study: Linear expressions
+#### Case study: Linear expressions
 
 Consider a class of expressions built with one operation: `+` and one
 variable (say, `x`). We want to prove that any expression of this type
@@ -108,4 +108,5 @@ how to do mutual recursion on mutually inductive types.
 
 ## Home task
 
-* To `crush` chap. More Coq of SF
+* To `crush` chap. More Coq of SF. If it turns to be too easy, proceed with
+  Lists chap. 
